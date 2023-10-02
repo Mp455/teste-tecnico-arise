@@ -8,6 +8,8 @@ export default {
       orangeHover: "#EA580C",
       white: "#FFFFFF",
       gray: "#F3F4F6",
+      inputBorder: "#E5E7EB",
+      grayText: "#4B5563",
     },
   },
   plugins: [],

@@ -11,10 +11,12 @@ export default function Header() {
 
       <div className="flex items-center gap-1">
         <Link to="/byName">
-          <Button variant="buttonWithHover"> Pesquisar Receita</Button>
+          <Button variant="buttonWithHover"> Pesquisar Receitas</Button>
         </Link>
 
-        <Button variant="buttonWithHover"> Receitas por Letra</Button>
+        <Link to="/byLetter">
+          <Button variant="buttonWithHover"> Receitas por Letra</Button>
+        </Link>
         <Button variant="buttonWithHover"> Receitas por Igredientes</Button>
       </div>
     </header>
