@@ -17,7 +17,9 @@ export default function Header() {
         <Link to="/byLetter">
           <Button variant="buttonWithHover"> Receitas por Letra</Button>
         </Link>
-        <Button variant="buttonWithHover"> Receitas por Igredientes</Button>
+        <Link to="/ingredients">
+          <Button variant="buttonWithHover"> Receitas por Igredientes</Button>
+        </Link>
       </div>
     </header>
   );
