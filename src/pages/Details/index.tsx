@@ -16,6 +16,8 @@ export default function Details() {
     strInstructions: string;
     strYoutube: string;
     strSource: string;
+    strIngredients: string[];
+    strMeasures: string[];
   } | null>(null);
 
   useEffect(() => {
@@ -25,7 +27,26 @@ export default function Details() {
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
         );
         const data = await response.json();
-        setFoodDetails(data.meals[0]);
+        const meal = data.meals[0];
+
+        const ingredients = [];
+        const measures = [];
+        for (let i = 1; i <= 20; i++) {
+          const ingredientKey = `strIngredient${i}`;
+          const measureKey = `strMeasure${i}`;
+          const ingredient = meal[ingredientKey];
+          const measure = meal[measureKey];
+          if (ingredient && measure) {
+            ingredients.push(ingredient);
+            measures.push(measure);
+          }
+        }
+
+        setFoodDetails({
+          ...meal,
+          strIngredients: ingredients,
+          strMeasures: measures,
+        });
       } catch (error) {
         console.error("Erro ao buscar detalhes da comida:", error);
       }
@@ -33,30 +54,6 @@ export default function Details() {
 
     fetchFoodDetails();
   }, [id]);
-
-  const renderIngredients = () => {
-    const ingredients = [];
-    for (let i = 1; i <= 20; i++) {
-      const ingredientKey = `strIngredient${i}`;
-      const ingredient = foodDetails?.[ingredientKey];
-      if (ingredient && ingredient.trim() !== "") {
-        ingredients.push(<li key={i}>{`${ingredient}`}</li>);
-      }
-    }
-    return ingredients;
-  };
-
-  const renderMeasures = () => {
-    const measures = [];
-    for (let i = 1; i <= 20; i++) {
-      const measureKey = `strMeasure${i}`;
-      const measure = foodDetails?.[measureKey];
-      if (measure && measure.trim() !== "") {
-        measures.push(<li key={i}>{measure}</li>);
-      }
-    }
-    return measures;
-  };
 
   return (
     <div className="min-h-full h-[100vh] bg-gray overflow-x-auto">
@@ -93,11 +90,19 @@ export default function Details() {
                       {" "}
                       Ingredientes
                     </h2>
-                    <ul>{renderIngredients()}</ul>
+                    <ul>
+                      {foodDetails.strIngredients.map((ingredient, index) => (
+                        <li key={index}>{ingredient}</li>
+                      ))}
+                    </ul>
                   </div>
                   <div>
                     <h2 className="text-2xl font-semibold mb-2">Medidas</h2>
-                    <ul>{renderMeasures()}</ul>
+                    <ul>
+                      {foodDetails.strMeasures.map((measure, index) => (
+                        <li key={index}>{measure}</li>
+                      ))}
+                    </ul>
                   </div>
                   <div className="mt-4 col-span-1 sm:col-span-2 w-full flex justify-center gap-8">
                     <div className="mr-8">
