@@ -1,7 +1,9 @@
-import Home from "../pages/Home/Home";
+import Home from "../pages/Home";
 import SearchByName from "../pages/SearchByName";
 import SearchByLetter from "../pages/SearchByLetter";
-import Igredients from "../pages/Igredients";
+import Ingredients from "../pages/Ingredients";
+import ByIngredient from "../pages/ByIngredient";
+import Details from "../pages/Details";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export function AppRoutes() {
@@ -9,9 +11,11 @@ export function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/byName" element={<SearchByName />} />
-        <Route path="/byLetter" element={<SearchByLetter />} />
-        <Route path="/ingredients" element={<Igredients />} />
+        <Route path="/details" element={<Details />} />
+        <Route path="/by-name" element={<SearchByName />} />
+        <Route path="/by-letter" element={<SearchByLetter />} />
+        <Route path="/ingredients" element={<Ingredients />} />
+        <Route path="/by-ingredient" element={<ByIngredient />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
 type Props = {
-  variant?: "default" | "buttonNoBorder" | "buttonWithHover" | "buttonCard";
+  variant?: "buttonNoBorder" | "buttonWithHover" | "buttonCard";
   children: React.ReactNode;
 };
 

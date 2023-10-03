@@ -10,6 +10,7 @@ export default {
       gray: "#F3F4F6",
       inputBorder: "#E5E7EB",
       grayText: "#4B5563",
+      blue: "#4F46E5 ",
     },
   },
   plugins: [],
