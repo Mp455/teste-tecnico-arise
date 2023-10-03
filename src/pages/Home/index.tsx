@@ -4,13 +4,16 @@ import Card from "../../components/Card/Card";
 
 import { useState, useEffect } from "react";
 
+type Recipe = {
+  idMeal: string;
+  strMealThumb: string;
+  strMeal: string;
+  strInstructions: string;
+  strYoutube: string;
+};
+
 export default function Home() {
-  const [receita, setReceita] = useState({
-    strMealThumb: "",
-    strMeal: "",
-    strInstructions: "",
-    strYoutube: "",
-  });
+  const [receita, setReceita] = useState<Recipe>();
 
   useEffect(() => {
     async function fetchReceitaAleatoria() {

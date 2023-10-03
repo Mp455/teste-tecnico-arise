@@ -8,8 +8,8 @@ type CardProps = {
     idMeal: string;
     strMealThumb: string;
     strMeal: string;
-    strInstructions: string;
-    strYoutube: string;
+    strInstructions?: string;
+    strYoutube?: string;
   };
 };
 
