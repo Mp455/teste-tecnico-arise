@@ -11,7 +11,7 @@ export function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/details" element={<Details />} />
+        <Route path="/details/:id" element={<Details />} />
         <Route path="/by-name" element={<SearchByName />} />
         <Route path="/by-letter" element={<SearchByLetter />} />
         <Route path="/ingredients" element={<Ingredients />} />
