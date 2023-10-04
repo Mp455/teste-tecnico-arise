@@ -66,7 +66,7 @@ export default function ByLetter() {
       <main>
         <div className="max-w-[1200px] mx-auto">
           <div className="p-8 pb-0">
-            <Title>Receitas por letra {letter}</Title>
+            <Title>Receitas por Letra {letter}</Title>
           </div>
           <div className="flex flex-wrap justify-center gap-3 px-8 mb-6">
             {alphabet.map((letter, index) => (
@@ -78,9 +78,7 @@ export default function ByLetter() {
               />
             ))}
           </div>
-          {error && (
-            <p className="text-center text-red-500 bg-gray p-8">{error}</p>
-          )}
+          {error && <p className="text-center bg-gray p-8">{error}</p>}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-8">
             {recipes
               .filter((recipe) => letter && recipe.strMeal.startsWith(letter))

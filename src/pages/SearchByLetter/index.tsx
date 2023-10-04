@@ -78,7 +78,7 @@ export default function SearchByLetter() {
           </div>
 
           {error ? (
-            <p className="text-center text-red-500 bg-gray p-8">{error}</p>
+            <p className="text-center bg-gray p-8">{error}</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-8">
               {recipes.length > 0 ? (
@@ -86,9 +86,11 @@ export default function SearchByLetter() {
                   <Card key={recipe.idMeal} showText={true} receita={recipe} />
                 ))
               ) : (
-                <p className="text-center text-grayText bg-gray p-8">
-                  Nenhuma receita encontrada
-                </p>
+                <div className="col-span-3 flex justify-center items-center">
+                  <p className="text-center text-grayText bg-gray p-8">
+                    Nenhuma receita encontrada
+                  </p>
+                </div>
               )}
             </div>
           )}

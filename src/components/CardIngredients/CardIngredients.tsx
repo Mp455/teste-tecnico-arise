@@ -1,11 +1,15 @@
+import { Link } from "react-router-dom";
+
 type Props = {
-  children: React.ReactNode;
+  strIngredient: string;
 };
 
-export default function CardIngredients({ children }: Props) {
+export default function CardIngredients({ strIngredient }: Props) {
   return (
     <div className="block bg-white rounded p-3 mb-3 shadow">
-      <h3 className="text-2xl font-bold mb-2">{children}</h3>
+      <Link to={`/by-ingredient/${strIngredient}`}>
+        <h3 className="text-2xl font-bold mb-2">{strIngredient}</h3>
+      </Link>
     </div>
   );
 }

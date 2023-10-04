@@ -1,23 +1,30 @@
-// Input.tsx
 import React from "react";
 
 type Props = {
   placeholder?: string;
-  onChange: (value: string) => void;
+  value?: string;
+  onChange: (
+    value: string
+  ) => void | ((event: React.ChangeEvent<HTMLInputElement> | string) => void);
 };
 
 export default function Input({ placeholder, onChange }: Props) {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement> | string
+  ) => {
+    const inputValue = typeof e === "string" ? e : e.target.value;
+    if (inputValue !== undefined) {
+      onChange(inputValue);
+    }
   };
 
   return (
-    <div className="px-8 pb-3">
+    <div className="mb-4">
       <input
         type="text"
         className="bg-white border-inputBorder p-2 rounded border-2 w-full"
         placeholder={placeholder}
-        onChange={handleInputChange}
+        onChange={(e) => handleInputChange(e)}
       />
     </div>
   );

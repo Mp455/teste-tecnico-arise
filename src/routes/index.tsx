@@ -17,7 +17,7 @@ export function AppRoutes() {
         <Route path="/by-letter" element={<SearchByLetter />} />
         <Route path="/by-letter/:letter" element={<ByLetter />} />
         <Route path="/ingredients" element={<Ingredients />} />
-        <Route path="/by-ingredient" element={<ByIngredient />} />
+        <Route path="/by-ingredient/:ingredient" element={<ByIngredient />} />
       </Routes>
     </BrowserRouter>
   );

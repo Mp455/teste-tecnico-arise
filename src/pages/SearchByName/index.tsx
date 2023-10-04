@@ -20,6 +20,7 @@ export default function SearchByName() {
   const [searchResults, setSearchResults] = useState<Recipe[] | null>(null);
 
   const handleSearchChange = (value: string) => {
+    console.log("Valor de pesquisa:", value);
     setSearchValue(value);
   };
 
@@ -59,10 +60,13 @@ export default function SearchByName() {
           <div className="p-8 pb-0">
             <Title>Pesquisar Refeições por Nome</Title>
           </div>
-          <Input
-            placeholder="Pesquisar por receita"
-            onChange={handleSearchChange}
-          />
+          <div className="px-8 pb-3">
+            <Input
+              placeholder="Pesquisar por receita"
+              onChange={handleSearchChange}
+            />
+          </div>
+
           {searchResults === null && (
             <p className="text-center text-grayText bg-gray p-8">
               Pesquise por receitas digitando um nome
