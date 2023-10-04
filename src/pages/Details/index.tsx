@@ -36,6 +36,8 @@ export default function Details() {
           const measureKey = `strMeasure${i}`;
           const ingredient = meal[ingredientKey];
           const measure = meal[measureKey];
+
+          //Verifica se tanto o ingrediente quanto a medida são válidos
           if (ingredient && measure) {
             ingredients.push(ingredient);
             measures.push(measure);

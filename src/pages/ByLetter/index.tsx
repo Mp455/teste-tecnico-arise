@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Letters from "../../components/Letters/Letters";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import Card from "../../components/Card/Card";
-import Letters from "../../components/Letters/Letters";
+import { useState, useEffect } from "react";
 
 type Recipe = {
   idMeal: string;
@@ -13,40 +13,13 @@ type Recipe = {
   strYoutube: string;
 };
 
-export default function SearchByLetter() {
+export default function ByLetter() {
   const navigate = useNavigate();
-  const [selectedLetter, setSelectedLetter] = useState("");
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchRecipesByLetter() {
-      try {
-        const response = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/search.php?f=${selectedLetter}`
-        );
-        const data = await response.json();
-
-        if (data.meals) {
-          setRecipes(data.meals);
-          setError(null); // Limpar qualquer erro anterior
-        } else {
-          setRecipes([]);
-          setError("Nenhuma receita encontrada.");
-        }
-      } catch (error) {
-        console.error("Erro ao buscar receitas:", error);
-        setRecipes([]);
-        setError("Erro ao buscar receitas. Tente novamente mais tarde.");
-      }
-    }
-
-    if (selectedLetter) {
-      fetchRecipesByLetter();
-    } else {
-      setRecipes([]);
-    }
-  }, [selectedLetter]);
+  const [selectedLetter, setSelectedLetter] = useState("");
+  const { letter } = useParams();
 
   //cria um array que representa o alfabeto de A a Z em letras maiúsculas
   const alphabet = Array.from({ length: 26 }, (_, index) =>
@@ -58,40 +31,63 @@ export default function SearchByLetter() {
     navigate(`/by-letter/${letter}`);
   };
 
+  useEffect(() => {
+    async function fetchRecipesByLetter() {
+      try {
+        const response = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
+        );
+        const data = await response.json();
+
+        if (data.meals) {
+          setRecipes(data.meals);
+          setError(null); // Limpa qualquer erro anterior
+        } else {
+          setRecipes([]);
+          setError("Nenhuma receita encontrada."); // Configurar mensagem de erro
+        }
+      } catch (error) {
+        console.error("Erro ao buscar receitas:", error);
+        setRecipes([]);
+        setError("Erro ao buscar receitas. Tente novamente mais tarde."); // Configurar mensagem de erro
+      }
+    }
+
+    if (letter) {
+      fetchRecipesByLetter();
+    } else {
+      setRecipes([]);
+    }
+  }, [letter]);
+
   return (
     <div className="min-h-full h-[100vh] bg-gray overflow-x-auto">
       <Header />
       <main>
         <div className="max-w-[1200px] mx-auto">
           <div className="p-8 pb-0">
-            <Title>Receitas por Letra</Title>
+            <Title>Receitas por letra {letter}</Title>
           </div>
           <div className="flex flex-wrap justify-center gap-3 px-8 mb-6">
             {alphabet.map((letter, index) => (
               <Letters
                 key={index}
-                letter={letter} // é passado a letra como propriedade 'letter'
+                letter={letter}
                 onClick={() => handleLetterClick(letter)}
                 isActive={letter === selectedLetter}
               />
             ))}
           </div>
-
-          {error ? (
+          {error && (
             <p className="text-center text-red-500 bg-gray p-8">{error}</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-8">
-              {recipes.length > 0 ? (
-                recipes.map((recipe) => (
-                  <Card key={recipe.idMeal} showText={true} receita={recipe} />
-                ))
-              ) : (
-                <p className="text-center text-grayText bg-gray p-8">
-                  Nenhuma receita encontrada
-                </p>
-              )}
-            </div>
           )}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-8">
+            {recipes
+              .filter((recipe) => letter && recipe.strMeal.startsWith(letter))
+              .map((recipe) => (
+                <Card key={recipe.idMeal} showText={true} receita={recipe} />
+              ))}
+          </div>
         </div>
       </main>
     </div>

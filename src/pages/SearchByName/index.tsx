@@ -31,7 +31,7 @@ export default function SearchByName() {
         );
         const data: ApiResponse = await response.json();
 
-        // Verifique se os resultados existem e têm a estrutura correta
+        // Verifica se os resultados existem e têm a estrutura correta
         if (data.meals) {
           setSearchResults(data.meals);
         } else {
@@ -57,7 +57,7 @@ export default function SearchByName() {
       <main>
         <div className="max-w-[1200px] mx-auto">
           <div className="p-8 pb-0">
-            <Title>Pesquisar refeições por Nome</Title>
+            <Title>Pesquisar Refeições por Nome</Title>
           </div>
           <Input
             placeholder="Pesquisar por receita"
