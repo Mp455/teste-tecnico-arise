@@ -14,7 +14,6 @@ type Recipe = {
 
 export default function ByIngredient() {
   const { ingredient } = useParams();
-  console.log(ingredient);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -24,8 +23,6 @@ export default function ByIngredient() {
           `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
         );
         const data = await response.json();
-
-        console.log(data);
 
         if (data.meals) {
           setRecipes(data.meals);
